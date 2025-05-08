@@ -17,3 +17,19 @@ subdomain = your ngrok subdomain
 ## logs
 
 log can be found on `storage\logs\laravel.log`
+
+# Clearing cache
+
+Run these commands to cleanup configurations cache
+
+```bash
+php artisan config:clear
+php artisan view:clear
+php artisan route:clear
+```
+
+Run this to clear conversation cache
+
+```bash
+php artisan optimize:clear
+```

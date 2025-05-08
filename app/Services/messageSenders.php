@@ -47,4 +47,46 @@ class messageSenders
             return null;
         }
     }
+
+    public function sendInteractiveMessage($to, $body = "", $options = [])
+    {
+        // button message template
+        // {
+        //     'type' => 'reply',
+        //     'reply' => [
+        //         'id' => $option['id'],
+        //         'title' => $option['title'],
+        //     ],
+        // }
+
+        $data = [
+            'messaging_product' => 'whatsapp',
+            'to' => $to,
+            'type' => 'interactive',
+            'interactive' => [
+                'type' => 'button',
+                'body' => [
+                    'text' => $body,
+                ],
+                'action' => [
+                    'buttons' => $options,
+                ],
+            ]
+        ];
+
+        try {
+            $response = Http::withHeaders($this->headers)->post($this->url, $data);
+
+            if ($response->successful()) {
+                Log::info('Message sent successfully: ' . $response->body());
+                return $response->json();
+            } else {
+                Log::error('Failed to send message: ' . $response->body());
+                return null;
+            }
+        } catch (\Exception $e) {
+            Log::error('Error sending message: ' . $e->getMessage());
+            return null;
+        }
+    }
 }
