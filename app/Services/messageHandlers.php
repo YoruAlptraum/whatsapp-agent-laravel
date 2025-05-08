@@ -3,9 +3,17 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Log;
+use App\Services\messageSenders;
 
 class messageHandlers
 {
+    protected $messageSenders;
+
+    public function __construct()
+    {
+        $this->messageSenders = new messageSenders();
+    }
+
     public function handleReceivedMessage($data, $userState)
     {
         $value = $data['entry'][0]['changes'][0]['value'];
@@ -19,14 +27,22 @@ class messageHandlers
             $msg = $messages[0]['text']['body'] ?? "";
 
             // for testing: manually trigger a message to stop the bot fom responding
-            if ($msg == 'stop') {
+            if ($messages[0]['type'] == 'text' && $msg == 'stop') {
                 Log::info('>>>>>>>>> stop message <<<<<<<<<');
-                // sendMessage(contacts[0]["wa_id"], "stop responding");
+                // send message that will stop the bot from responding
+                $this->messageSenders->sendMessage($contacts[0]["wa_id"], "stop responding");
             }
 
+
+
             try {
+                $apiRes = null;
+                // check if next message has a message to send
+
+
+
             } catch (\Exception $e) {
-                Log::error('Error sending message: ' . $e->getMessage());
+                Log::error('Error handling message: ' . $e->getMessage());
             }
         } else {
             Log::info('No contacts or messages found');

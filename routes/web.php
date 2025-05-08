@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebhookController;
 
-
 Route::withoutMiddleware(['web'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
