@@ -16,7 +16,7 @@ use App\Http\Controllers\WebhookController;
 
 Route::withoutMiddleware(['web'])->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return '<html><body style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;"><h1>WhatsApp Webhook Service</h1></body></html>';
     });
 
     # webhook routes
