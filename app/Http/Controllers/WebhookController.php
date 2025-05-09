@@ -83,15 +83,19 @@ class WebhookController extends Controller
 
     public function verifyWebhook(Request $request)
     {
-        $mode = $request->query('hub.mode');
-        $token = $request->query('hub.verify_token');
-        $challenge = $request->query('hub.challenge');
+        $info = $request->all();
+        $mode = $info['hub_mode'] ?? null;
+        $token = $info['hub_verify_token'] ?? null;
+        $challenge = $info['hub_challenge'] ?? null;
+
+        Log::info("Mode: {$mode} Token: {$token} Challenge: {$challenge}");
 
         if ($mode && $token) {
             if ($mode === 'subscribe' && $token === env('VERIFICATION_TOKEN')) {
                 Log::info('WEBHOOK_VERIFIED');
                 return response($challenge, 200);
             } else {
+                Log::info("Invalid verification token");
                 return response('', 403);
             }
         } else {
