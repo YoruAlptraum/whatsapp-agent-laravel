@@ -10,9 +10,11 @@ https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#configure-we
 
 `cp .env.example .env` populate `.env`
 
+`composer i`
+
 `php artisan key:generate`
 
-`composer i`
+`php artisan migrate --path=database/migrations` creates cache tables
 
 `cp storage\app\private\responses.json.example storage\app\private\responses.json` populate `storage\app\private\responses.json`
 
