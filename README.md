@@ -1,6 +1,10 @@
 # Basic Whatsapp bot agent
 
-A basic structure for a whatsapp bot conversation
+A basic structure for a whatsapp bot webhook.
+
+You will need to register your bot on Meta, intro guide:
+
+https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#configure-webhooks
 
 ## Setup
 
