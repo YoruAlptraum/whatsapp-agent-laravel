@@ -2,7 +2,7 @@
 
 A basic structure for a whatsapp bot webhook.
 
-You will need to register your bot on Meta, intro guide:
+You will need to register your webhook on Meta, intro guide:
 
 https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#configure-webhooks
 
@@ -38,7 +38,7 @@ the interactive (multiple choice) message buttons have a very limited character 
 
 ## Logs
 
-log can be found on `storage\logs\laravel.log`
+Logs can be found on `storage\logs\laravel.log`
 
 # Clearing cache
 
