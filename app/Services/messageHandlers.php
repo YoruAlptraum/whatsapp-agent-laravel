@@ -22,8 +22,8 @@ class messageHandlers
     public function handleReceivedMessage($data, $userState)
     {
         $value = $data['entry'][0]['changes'][0]['value'];
-        $contacts = $value['contacts'] ?? null;
-        $messages = $value['messages'] ?? null;
+        $contacts = $value['contacts'];
+        $messages = $value['messages'];
 
         if (!$userState['respond']) {
             Log::info('>>>>>>>>> respond is set to false <<<<<<<<<');
@@ -63,7 +63,6 @@ class messageHandlers
 
                 if (isset($this->responseDict[$userState['nextMessage']]['options'])) {
                     foreach ($this->responseDict[$userState['nextMessage']]['options'] as $key => $title) {
-                        Log::info("option: $title (id: $key)");
                         $options[] = [
                             'type' => 'reply',
                             'reply' => [
