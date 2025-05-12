@@ -8,7 +8,7 @@ https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#configure-we
 
 ## Setup
 
-`cp .env.example .env` populate `.env`
+`cp .env.example .env` populate `.env` (set `APP_ENV=local` if locally and `APP_ENV=production` if deploying)
 
 `composer i`
 
@@ -18,9 +18,9 @@ https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#configure-we
 
 `cp storage\app\private\responses.json.example storage\app\private\responses.json` populate `storage\app\private\responses.json`
 
-## Local development running ngrok
+## Local development
 
-`php artisan ngrok [localUrl] --extra='--url=[subdomain].ngrok-free.app'`
+run the code `php artisan ngrok [localUrl] --extra='--url=[subdomain].ngrok-free.app'` to expose a local project to the internet
 
 localUrl = url used locally to access the project
 

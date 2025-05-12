@@ -34,7 +34,7 @@ class messageHandlers
             $msg = $messages[0]['text']['body'] ?? "";
 
             // for testing: manually trigger a message to stop the bot fom responding
-            if ($messages[0]['type'] == 'text' && $msg == 'stop') {
+            if (env('APP_ENV', 'local') == 'local' && $messages[0]['type'] == 'text' && $msg == 'stop') {
                 Log::info('>>>>>>>>> stop message <<<<<<<<<');
                 // send message that will stop the bot from responding
                 $this->messageSenders->sendMessage($contacts[0]["wa_id"], "stop responding");
@@ -102,7 +102,7 @@ class messageHandlers
 
         // Check if the message is from human-agent and stop responding
         if ($statuses && $statuses[0]["id"] !== $userState['lastAPIMessage']) {
-            $userState->respond = false;
+            $userState['respond'] = false;
             Log::info("Agent message received. Stopping bot response.");
         }
 
