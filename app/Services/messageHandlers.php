@@ -10,6 +10,7 @@ class messageHandlers
 {
     protected $messageSenders;
     protected $responseDict;
+    protected $invalidDict;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ class messageHandlers
 
         $json = Storage::disk('local')->get('/responses.json');
         $this->responseDict = json_decode($json, true)['responses'];
+        $this->invalidDict = json_decode($json, true)['invalid'];
     }
 
     public function handleReceivedMessage($data, $userState)
@@ -57,7 +59,7 @@ class messageHandlers
                         $msg = $this->responseDict[$userState['nextMessage']][$userInput]['message'];
                         $nextMessage = $this->responseDict[$userState['nextMessage']][$userInput]['next'];
                     } else {
-                        $msg = env('INVALID_OPTION', 'Invalid option selected. Please try again.');
+                        $msg = $this->invalidDict["invalid-option"]['message'];
                     }
                 }
 
@@ -99,7 +101,7 @@ class messageHandlers
         $statuses = $value['statuses'] ?? null;
 
         // Check if the message is from human-agent and stop responding
-        if ($statuses && $statuses[0]["id"] !== $userState->lastAPIMessage) {
+        if ($statuses && $statuses[0]["id"] !== $userState['lastAPIMessage']) {
             $userState->respond = false;
             Log::info("Agent message received. Stopping bot response.");
         }

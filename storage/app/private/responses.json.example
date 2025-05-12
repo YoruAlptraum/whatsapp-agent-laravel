@@ -27,5 +27,10 @@
       "message": "",
       "next": "end"
     },
+  },
+  "invalid": {
+      "invalid-option": {
+          "message": "Option is invalid"
+      }
   }
 }
