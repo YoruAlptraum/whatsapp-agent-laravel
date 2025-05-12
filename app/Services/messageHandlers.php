@@ -57,7 +57,7 @@ class messageHandlers
                         $msg = $this->responseDict[$userState['nextMessage']][$userInput]['message'];
                         $nextMessage = $this->responseDict[$userState['nextMessage']][$userInput]['next'];
                     } else {
-                        $msg = "Opção inválida. Digite novamente";
+                        $msg = env('INVALID_OPTION', 'Invalid option selected. Please try again.');
                     }
                 }
 
@@ -96,10 +96,13 @@ class messageHandlers
     public function handleSentMessage($data, $userState)
     {
         $value = $data['entry'][0]['changes'][0]['value'];
-        $contacts = $value['contacts'] ?? null;
         $statuses = $value['statuses'] ?? null;
 
-        // Pending 
+        // Check if the message is from human-agent and stop responding
+        if ($statuses && $statuses[0]["id"] !== $userState->lastAPIMessage) {
+            $userState->respond = false;
+            Log::info("Agent message received. Stopping bot response.");
+        }
 
         return $userState;
     }

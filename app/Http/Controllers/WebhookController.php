@@ -92,13 +92,14 @@ class WebhookController extends Controller
 
         if ($mode && $token) {
             if ($mode === 'subscribe' && $token === env('VERIFICATION_TOKEN')) {
-                Log::info('WEBHOOK_VERIFIED');
+                Log::info('Webhook verified');
                 return response($challenge, 200);
             } else {
                 Log::info("Invalid verification token");
                 return response('', 403);
             }
         } else {
+            Log::info("Invalid webhook verification request");
             return response()->json(['message' => 'Thank you for the message']);
         }
     }
