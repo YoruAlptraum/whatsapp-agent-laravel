@@ -18,7 +18,15 @@ https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#configure-we
 
 `cp storage\app\private\responses.json.example storage\app\private\responses.json` populate `storage\app\private\responses.json`
 
+## Meta config
+
+set `https://url/webhook` for url callback and verification token
+
+on Whatsapp configurations double check `messages` is enabled, it sometimes disables itself
+
 ## Local development
+
+run locally `php artisan serve`
 
 run the code `php artisan ngrok [localUrl] --extra='--url=[subdomain].ngrok-free.app'` to expose a local project to the internet
 
