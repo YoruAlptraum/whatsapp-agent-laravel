@@ -81,7 +81,7 @@ class messageSenders
                 Log::info('Message sent successfully: ' . $response->body());
                 return $response->json();
             } else {
-                Log::error('Failed to send message: ' . $response->body());
+                Log::error('Failed to send interactive message: ' . $response->body());
                 return null;
             }
         } catch (\Exception $e) {

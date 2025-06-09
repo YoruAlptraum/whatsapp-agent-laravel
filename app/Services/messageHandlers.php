@@ -58,13 +58,15 @@ class messageHandlers
                     if (isset($this->responseDict[$userState['nextMessage']][$userInput])) {
                         $msg = $this->responseDict[$userState['nextMessage']][$userInput]['message'];
                         $nextMessage = $this->responseDict[$userState['nextMessage']][$userInput]['next'];
+                        $msgOptions = $this->responseDict[$userState['nextMessage']][$userInput]['options'] ?? [];
                     } else {
                         $msg = $this->invalidDict["invalid-option"]['message'];
                     }
                 }
 
-                if (isset($this->responseDict[$userState['nextMessage']]['options'])) {
-                    foreach ($this->responseDict[$userState['nextMessage']]['options'] as $key => $title) {
+                if (isset($this->responseDict[$userState['nextMessage']]['options']) || !empty($msgOptions)) {
+                    $msgOptions = $msgOptions ?? $this->responseDict[$userState['nextMessage']]['options'];
+                    foreach ($msgOptions as $key => $title) {
                         $options[] = [
                             'type' => 'reply',
                             'reply' => [
